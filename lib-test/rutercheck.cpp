@@ -2,11 +2,11 @@
 #include "Poco/Net/HTTPSClientSession.h"
 #include "Poco/Net/HTTPResponse.h"
 #include "Poco/Net/Context.h"
-#include "Poco/URI.h"
 #include "Poco/Path.h"
-#include "Poco/StreamCopier.h"
-
+#include "Poco/URI.h"
 #include "iostream"
+#include "responseparser.h"
+
 
 using namespace std;
 using Poco::Net::HTTPSClientSession;
@@ -14,7 +14,6 @@ using Poco::Net::HTTPRequest;
 using Poco::Net::HTTPResponse;
 using Poco::Net::HTTPMessage;
 using Poco::Net::Context;
-using Poco::StreamCopier;
 using Poco::Path;
 using Poco::URI;
 
@@ -33,12 +32,7 @@ int main(int argc, char** argv)
     HTTPSClientSession session( uri.getHost(),uri.getPort(), context);
 
     session.sendRequest(request);
+    HTTPResponse response;    
 
-    HTTPResponse response;
-
-    std::cout << response.getStatus() << std::endl;
-
-    std::istream& rs = session.receiveResponse(response);
-    StreamCopier::copyStream(rs, std::cout);
-
+    responseparser(session, response);
 }

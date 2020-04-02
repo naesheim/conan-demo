@@ -18,12 +18,27 @@ _add artifactory repository to conan remote_
 conan remote add <REMOTE-NAME> http://localhost:8080/artifactory/api/conan/conan-local
 ```
 
-<H5>Conan commands:</H5>
 
+<H4> Conan example</H4>
+
+consists of:
+- **parse-lib**, a header-only library.
+- **lib-test**, an executable with the other library as a dependency.
+
+
+_from the parse-lib folder run:_
 ```
 conan install . --install-folder=tmp/build
-conan build . --source-folder=tmp/source --build-folder=tmp/build
 conan package . --build-folder=tmp/build --package-folder=tmp/package
 conan export-pkg . 
-conan upload ruter-check -r <REMOTE-NAME> --all
+conan upload output-parser -r <REMOTE-NAME> --all
+```
+
+_from the lib-test folder run:_
+```
+conan install . --install-folder=tmp/build
+conan build . --build-folder=tmp/build
+
+//verify binary
+./tmp/build/bin/rutercheck
 ```
