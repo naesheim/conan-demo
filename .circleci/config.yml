@@ -1,0 +1,61 @@
+version: 2.1
+jobs:
+    verify-library:
+      docker:
+          - image: conanio/gcc6
+      steps:
+      - checkout
+      - run:
+          name: pack python folder
+          command: |
+              conan create . $USER/$CHANNEL --test-folder ../lib-test/
+    
+    master-integration:
+      environment: 
+          USER: "CI"
+          CHANNEL: "prod"
+      docker:
+          - image: conanio/gcc6
+      steps:
+      - checkout
+      - run:
+          name: merge with master
+          command: |
+              git checkout -b master
+              git merge --ff-only $CIRCLE_BRANCH
+              git push -u origin master
+              echo "deploy package to artifactory"
+
+    increment-and-deploy:
+      docker:
+          - image: conanio/gcc6
+      steps:
+          - checkout
+          - run:  
+              name: bump version
+              command: |
+                cd parse-lib
+                NEW_VERSION = conan inspect . | grep 'version:'| awk '{print $2}'
+                echo "new version $NEW_VERSION"
+      
+workflows:
+  version: 2
+  build:
+    jobs:
+      - verify-library:
+          filters:
+            branches:
+              only:
+                - feature/*
+      - master-integration:
+          filters:
+            branches:
+              only:
+                - feature/*
+          requires:
+            - verify-library
+      - increment-and-deploy:
+          filters:
+            branches:
+              only:
+                - master

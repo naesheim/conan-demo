@@ -25,20 +25,16 @@ consists of:
 - **parse-lib**, a header-only library.
 - **lib-test**, an executable with the other library as a dependency.
 
+`cd parse-lib`
 
-_from the parse-lib folder run:_
-```
-conan install . --install-folder=tmp/build
-conan package . --build-folder=tmp/build --package-folder=tmp/package
-conan export-pkg . 
-conan upload output-parser -r <REMOTE-NAME> --all
-```
+_create a **parse-lib** package and test the package in **test-lib** project_:
+`conan create . naesheim/test --test-folder ../lib-test/`
 
-_from the lib-test folder run:_
-```
-conan install . --install-folder=tmp/build
-conan build . --build-folder=tmp/build
 
-//verify binary
-./tmp/build/bin/rutercheck
-```
+this is the equivelant of:
+* install **parse-lib** dependencies
+* package **parse-lib** library
+* change directory to **test-lib**
+* install **test-lib** dependencies including the generated **parse-lib** library
+* generate the binary
+* test the binary

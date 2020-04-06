@@ -12,7 +12,7 @@ class RutercheckConan(ConanFile):
     exports_sources = "src/*"
 
     def configure_cmake(self):
-        cmake = CMake(self)
+        cmake = CMake(self) 
         cmake.configure()
         return cmake
 
@@ -25,4 +25,4 @@ class RutercheckConan(ConanFile):
         self.copy("*.dll", dst="bin", keep_path=False)
 
     def test(self):
-        self.run(".bin/rutercheck")
+        self.run("bin/rutercheck")
