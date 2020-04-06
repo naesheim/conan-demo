@@ -11,4 +11,4 @@ RUN unzip /tmp/artifactory.zip -d /opt \
 && mv ${ARTIFACTORY_HOME}/etc ${ARTIFACTORY_HOME}/etc.default \
 && rm /tmp/artifactory.zip
 
-CMD /${ARTIFACTORY_HOME}/bin/artifactory.sh%                            
+CMD ${ARTIFACTORY_HOME}/bin/artifactory.sh                          
