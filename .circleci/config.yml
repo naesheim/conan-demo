@@ -35,8 +35,7 @@ jobs:
               name: bump version
               command: |
                 cd parse-lib
-                NEW_VERSION = conan inspect . | grep 'version:'| awk '{print $2}'
-                echo "new version $NEW_VERSION"
+                echo "current version" && conan inspect . | grep 'version:'| awk '{print $2}'
       
 workflows:
   version: 2
