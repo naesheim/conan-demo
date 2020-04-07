@@ -24,7 +24,7 @@ jobs:
           command: |
               git checkout -b master
               git merge --ff-only $CIRCLE_BRANCH
-              git push -u origin master
+              git push master
               echo "deploy package to artifactory"
 
     increment-and-deploy:
