@@ -13,10 +13,10 @@ jobs:
           command: |
               cd parse-lib
               conan create . $USER/$CHANNEL --test-folder ../lib-test/
-    
+  
     master-integration:
       docker:
-          - image: conanio/gcc6
+          - image: cimg/base:2020.01
       steps:
       - checkout
       - run:
