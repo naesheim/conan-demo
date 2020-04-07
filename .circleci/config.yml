@@ -45,12 +45,12 @@ workflows:
           filters:
             branches:
               only:
-                - ready/*
+                - /ready/.*
       - master-integration:
           filters:
             branches:
               only:
-                - ready/*
+                - /ready/.*
           requires:
             - verify-library
       - increment-and-deploy:
