@@ -11,7 +11,7 @@ jobs:
       - run:
           name: pack python folder
           command: |
-              cd project/parse-lib
+              cd parse-lib
               conan create . $USER/$CHANNEL --test-folder ../lib-test/
     
     master-integration:
