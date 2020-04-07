@@ -22,6 +22,7 @@ jobs:
       - run:
           name: merge with master
           command: |
+              git fetch origin
               git checkout master
               git merge --ff-only $CIRCLE_BRANCH
               git push -u origin master
