@@ -34,9 +34,10 @@ jobs:
                 git checkout master
                 git merge --ff-only $CIRCLE_BRANCH
                 git push -u origin master
-                echo "deploy package to artifactory"
+                git branch -d $CIRCLE_BRANCH
+                git push origin --delete $CIRCLE_BRANCH
 
-    increment-and-deploy:
+    deploy:
       docker:
           - image: conanio/gcc6
       steps:
@@ -44,7 +45,7 @@ jobs:
           - run:  
               name: bump version
               command: |
-                cd parse-lib
+                echo "deploy package to artifactory"
                 echo "current version" && conan inspect . | grep 'version:'| awk '{print $2}'
       
 workflows:
@@ -67,4 +68,6 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - /ready\/.*/
+          requires:
+            - master-integration

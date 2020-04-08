@@ -19,15 +19,15 @@ conan remote add <REMOTE-NAME> http://localhost:8080/artifactory/api/conan/conan
 ```
 
 
-<H4> Conan example</H4>
+<H4> Conan example and workflow</H4>
 
 consists of:
 - **parse-lib**, a header-only library.
 - **lib-test**, an executable with the other library as a dependency.
 
-`cd parse-lib`
+_The power with Conan is that you can test your libraries, effortlessly while developing. In this scenario we want to create a **parse-lib** package and test the package in **test-lib** project_:
 
-_create a **parse-lib** package and test the package in **test-lib** project_:
+`cd parse-lib`
 
 `conan create . naesheim/test --test-folder ../lib-test/`
 
