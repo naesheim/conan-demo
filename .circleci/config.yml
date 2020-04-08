@@ -64,7 +64,7 @@ workflows:
                 - /ready\/.*/
           requires:
             - verify-library
-      - increment-and-deploy:
+      - deploy:
           filters:
             branches:
               only:
