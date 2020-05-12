@@ -5,8 +5,6 @@ class RutercheckConan(ConanFile):
     version = "0.1.0"
     author = "naesheim"
     description = "parsing output"
-    exports_sources = "include/*"
-    no_copy_source = True
     requires = "poco/1.9.4"
 
     scm = {
@@ -15,9 +13,16 @@ class RutercheckConan(ConanFile):
         "revision": "auto"
     }
 
+    # scm = {
+	# "type": "git",
+	# "url": "https://github.com/naesheim/whereshans-web",
+	# "revision": "master",
+	# "subfolder": "web"
+    # }
+
     # def set_version(self):
     #     git = tools.Git(folder=self.recipe_folder)
     #     self.version = "%s_%s" % (git.get_branch(), git.get_revision())
 
     def package(self):
-        self.copy("*.h", dst="include")
+        self.copy("*.h",src="",dst="include/output-parser", keep_path=False)
