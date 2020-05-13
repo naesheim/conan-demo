@@ -68,6 +68,4 @@ workflows:
           filters:
             branches:
               only:
-                - /ready\/.*/
-          requires:
-            - master-integration
+                - master
