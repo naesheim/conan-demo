@@ -8,7 +8,7 @@ class RutercheckConan(ConanFile):
     url = "https://github.com/naesheim/conan-demo"
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
-    requires = "poco/1.9.4","output-parser/[>=0.1.0]"
+    requires = "poco/1.9.4","output-parser/[>=0.1.0]@hans/prod"
     exports_sources = "src/*"
 
     def configure_cmake(self):
